@@ -1,5 +1,17 @@
 # FlyRank ML Internship — Starter Repo
 
+## Capstone research
+
+**Does a higher top-20 score mean a better content queue?** This repository now includes a complete, reproducible refresh-scoring capstone on the real March and June FlyRank warehouse partitions. The frozen model finds 17 declines in the final global top twenty versus the volume baseline's 15, but loses within all five clients large enough for a top-twenty selection. The paper reports the adverse result, wide uncertainty and limits on editorial use.
+
+- [Deployed paper URL](submission/paper_url.txt) — populated only after the matching public page is verified.
+- [Executed capstone notebook](work/notebooks/capstone.ipynb) and [reproduction instructions](work/REPRODUCIBILITY.md).
+- [Research paper source](work/paper/index.html), [aggregate results](work/outputs/capstone_metrics.json), and [frozen protocol](work/capstone_protocol.json).
+
+The full historical recommendation queue and gated data stay outside Git. The shared starter materials follow below.
+
+---
+
 **Applied Search Intelligence: Google Search Ranking & Discoverability**
 
 This is the starting point for the FlyRank ML Internship. You **clone it into your own public

@@ -1,0 +1,515 @@
+{
+  "protocol_version": "capstone_v1",
+  "protocol_sha256": "181f2c24f2742facb0f37fdf77f1ab5727a2b5cfa5876477fe235e63117e437f",
+  "dataset_revision": "50cbf7c3909d07be4d1b5906b4d09e882e5acbf2",
+  "march_source": {
+    "source_rows": 9841378,
+    "first_date": "2026-03-01",
+    "last_date": "2026-03-31",
+    "clients": 55,
+    "gsc_available_rows": 3611061,
+    "gsc_false_rows": 6230317,
+    "gsc_null_rows": 0,
+    "subone_position_rows": 101548,
+    "duplicate_keys": 0,
+    "identical_extra_rows_removed": 0,
+    "conflicting_keys": 0,
+    "clean_page_day_rows": 9841378,
+    "partition": "fact_content_daily_performance/month=2026-03/data_0.parquet",
+    "source_grain_violations_before_cleaning": 0,
+    "source_grain_violations_after_cleaning": 0,
+    "aggregate_rows": 176738
+  },
+  "june_source": {
+    "source_rows": 11694072,
+    "first_date": "2026-06-01",
+    "last_date": "2026-06-30",
+    "clients": 65,
+    "gsc_available_rows": 3878937,
+    "gsc_false_rows": 7815135,
+    "gsc_null_rows": 0,
+    "subone_position_rows": 38010,
+    "duplicate_keys": 6390,
+    "identical_extra_rows_removed": 6390,
+    "conflicting_keys": 0,
+    "clean_page_day_rows": 11687682,
+    "partition": "fact_content_daily_performance/month=2026-06/data_0.parquet",
+    "source_grain_violations_before_cleaning": 6390,
+    "source_grain_violations_after_cleaning": 0,
+    "aggregate_rows": 208636
+  },
+  "march_eligible_pages": 60534,
+  "march_labeled_pages": 57624,
+  "train_pages": 14137,
+  "train_clients": 24,
+  "march_comparison_pages": 43487,
+  "march_comparison_clients": 8,
+  "march_comparison_keys_sha256": "ce472956efff058d16e5a3c596fee4d3f35095bbb1b440804ba79086e321b4c1",
+  "june_eligible_pages": 71761,
+  "june_labeled_pages": 64818,
+  "june_primary_keys_sha256": "152596bc96551080fb71ea6a3c5a3baa9c54db5365fd14f3f3612f6565522084",
+  "june_primary_unlabeled_pages": 3808,
+  "features": [
+    "mean_daily_impressions",
+    "ctr_pct",
+    "impression_weighted_position",
+    "active_day_share",
+    "daily_impression_cv"
+  ],
+  "cross_validation": [
+    {
+      "fold": 1,
+      "baseline": {
+        "n": 3233,
+        "clients": 1,
+        "base_rate": 0.1175378905041757,
+        "k": 20,
+        "top_k_declines": 3,
+        "precision_at_k": 0.15,
+        "roc_auc": 0.41684929990591624,
+        "average_precision": 0.10672678340827148,
+        "top_k_clients": 1
+      },
+      "model": {
+        "n": 3233,
+        "clients": 1,
+        "base_rate": 0.1175378905041757,
+        "k": 20,
+        "top_k_declines": 7,
+        "precision_at_k": 0.35,
+        "roc_auc": 0.520768074233955,
+        "average_precision": 0.14557902223584646,
+        "top_k_clients": 1
+      }
+    },
+    {
+      "fold": 2,
+      "baseline": {
+        "n": 2745,
+        "clients": 3,
+        "base_rate": 0.33260473588342443,
+        "k": 20,
+        "top_k_declines": 11,
+        "precision_at_k": 0.55,
+        "roc_auc": 0.5528384877341841,
+        "average_precision": 0.3876587985687157,
+        "top_k_clients": 1
+      },
+      "model": {
+        "n": 2745,
+        "clients": 3,
+        "base_rate": 0.33260473588342443,
+        "k": 20,
+        "top_k_declines": 13,
+        "precision_at_k": 0.65,
+        "roc_auc": 0.5601312554704726,
+        "average_precision": 0.3691686601057078,
+        "top_k_clients": 1
+      }
+    },
+    {
+      "fold": 3,
+      "baseline": {
+        "n": 2721,
+        "clients": 3,
+        "base_rate": 0.34435869165747884,
+        "k": 20,
+        "top_k_declines": 3,
+        "precision_at_k": 0.15,
+        "roc_auc": 0.43041909347167523,
+        "average_precision": 0.2938795149060218,
+        "top_k_clients": 2
+      },
+      "model": {
+        "n": 2721,
+        "clients": 3,
+        "base_rate": 0.34435869165747884,
+        "k": 20,
+        "top_k_declines": 12,
+        "precision_at_k": 0.6,
+        "roc_auc": 0.5313790673411469,
+        "average_precision": 0.3692999290679133,
+        "top_k_clients": 3
+      }
+    },
+    {
+      "fold": 4,
+      "baseline": {
+        "n": 2719,
+        "clients": 10,
+        "base_rate": 0.36042662743655757,
+        "k": 20,
+        "top_k_declines": 1,
+        "precision_at_k": 0.05,
+        "roc_auc": 0.5288504418443628,
+        "average_precision": 0.36724036247294956,
+        "top_k_clients": 3
+      },
+      "model": {
+        "n": 2719,
+        "clients": 10,
+        "base_rate": 0.36042662743655757,
+        "k": 20,
+        "top_k_declines": 18,
+        "precision_at_k": 0.9,
+        "roc_auc": 0.5822176714273979,
+        "average_precision": 0.41500938837372015,
+        "top_k_clients": 2
+      }
+    },
+    {
+      "fold": 5,
+      "baseline": {
+        "n": 2719,
+        "clients": 7,
+        "base_rate": 0.4027215888194189,
+        "k": 20,
+        "top_k_declines": 7,
+        "precision_at_k": 0.35,
+        "roc_auc": 0.603190442450008,
+        "average_precision": 0.4654061006505767,
+        "top_k_clients": 4
+      },
+      "model": {
+        "n": 2719,
+        "clients": 7,
+        "base_rate": 0.4027215888194189,
+        "k": 20,
+        "top_k_declines": 10,
+        "precision_at_k": 0.5,
+        "roc_auc": 0.5098032930697077,
+        "average_precision": 0.4192263517199255,
+        "top_k_clients": 2
+      }
+    }
+  ],
+  "march_comparison": {
+    "baseline": {
+      "n": 43487,
+      "clients": 8,
+      "base_rate": 0.37436475268471037,
+      "k": 20,
+      "top_k_declines": 9,
+      "precision_at_k": 0.45,
+      "roc_auc": 0.5324104424997577,
+      "average_precision": 0.398071706991129,
+      "top_k_clients": 3
+    },
+    "model": {
+      "n": 43487,
+      "clients": 8,
+      "base_rate": 0.37436475268471037,
+      "k": 20,
+      "top_k_declines": 14,
+      "precision_at_k": 0.7,
+      "roc_auc": 0.6037728244890004,
+      "average_precision": 0.44568691225097606,
+      "top_k_clients": 2
+    }
+  },
+  "june_primary": {
+    "baseline": {
+      "n": 35588,
+      "clients": 6,
+      "base_rate": 0.5889625716533663,
+      "k": 20,
+      "top_k_declines": 15,
+      "precision_at_k": 0.75,
+      "roc_auc": 0.5989326665816055,
+      "average_precision": 0.6353563969363651,
+      "top_k_clients": 4
+    },
+    "model": {
+      "n": 35588,
+      "clients": 6,
+      "base_rate": 0.5889625716533663,
+      "k": 20,
+      "top_k_declines": 17,
+      "precision_at_k": 0.85,
+      "roc_auc": 0.5752668451777101,
+      "average_precision": 0.6391958983025613,
+      "top_k_clients": 2
+    }
+  },
+  "june_secondary_all_clients": {
+    "baseline": {
+      "n": 64818,
+      "clients": 42,
+      "base_rate": 0.5029004288932086,
+      "k": 20,
+      "top_k_declines": 17,
+      "precision_at_k": 0.85,
+      "roc_auc": 0.5840496119187186,
+      "average_precision": 0.5470439874635186,
+      "top_k_clients": 7
+    },
+    "model": {
+      "n": 64818,
+      "clients": 42,
+      "base_rate": 0.5029004288932086,
+      "k": 20,
+      "top_k_declines": 16,
+      "precision_at_k": 0.8,
+      "roc_auc": 0.5783505951931124,
+      "average_precision": 0.5580429810862229,
+      "top_k_clients": 2
+    }
+  },
+  "primary_precision_lift_absolute": 0.09999999999999998,
+  "bootstrap": {
+    "method": "paired client bootstrap; rerank global top20; no model refitting",
+    "resamples": 500,
+    "clusters": 6,
+    "lift_interval_95": [
+      -0.6000000000000001,
+      0.19999999999999996
+    ],
+    "caution": "Descriptive percentile interval with few client clusters; not proof of significance."
+  },
+  "per_client_primary": [
+    {
+      "anonymous_client": "Group 1",
+      "n": 109,
+      "k": 20,
+      "base_rate": 0.6880733944954128,
+      "baseline_p_at_k": 0.9,
+      "model_p_at_k": 0.75
+    },
+    {
+      "anonymous_client": "Group 2",
+      "n": 9695,
+      "k": 20,
+      "base_rate": 0.6838576585869005,
+      "baseline_p_at_k": 0.95,
+      "model_p_at_k": 0.85
+    },
+    {
+      "anonymous_client": "Group 3",
+      "n": 8930,
+      "k": 20,
+      "base_rate": 0.5417693169092945,
+      "baseline_p_at_k": 0.65,
+      "model_p_at_k": 0.2
+    },
+    {
+      "anonymous_client": "Group 4",
+      "n": 14579,
+      "k": 20,
+      "base_rate": 0.5468825022292338,
+      "baseline_p_at_k": 0.6,
+      "model_p_at_k": 0.25
+    },
+    {
+      "anonymous_client": "Group 5",
+      "n": 17,
+      "k": 17,
+      "base_rate": 0.47058823529411764,
+      "baseline_p_at_k": 0.47058823529411764,
+      "model_p_at_k": 0.47058823529411764
+    },
+    {
+      "anonymous_client": "Group 6",
+      "n": 2258,
+      "k": 20,
+      "base_rate": 0.6359610274579274,
+      "baseline_p_at_k": 0.55,
+      "model_p_at_k": 0.4
+    }
+  ],
+  "permutation_interpretation": [
+    {
+      "feature": "mean_daily_impressions",
+      "mean_auc_drop": 0.06283615209354856,
+      "std_auc_drop": 0.0015241289234833627
+    },
+    {
+      "feature": "ctr_pct",
+      "mean_auc_drop": 0.02563283162897889,
+      "std_auc_drop": 0.002267116769589979
+    },
+    {
+      "feature": "impression_weighted_position",
+      "mean_auc_drop": -0.00036917722364506746,
+      "std_auc_drop": 0.0006078224761468359
+    },
+    {
+      "feature": "active_day_share",
+      "mean_auc_drop": 0.0,
+      "std_auc_drop": 0.0
+    },
+    {
+      "feature": "daily_impression_cv",
+      "mean_auc_drop": 0.00529961231936249,
+      "std_auc_drop": 0.0013167667198370394
+    }
+  ],
+  "feature_summary": [
+    {
+      "feature": "mean_daily_impressions",
+      "train_median": 35.92857142857143,
+      "final_median": 38.857142857142854,
+      "train_missing_fraction": 0.0,
+      "final_missing_fraction": 0.0
+    },
+    {
+      "feature": "ctr_pct",
+      "train_median": 0.1965923984272608,
+      "final_median": 0.2553463394517022,
+      "train_missing_fraction": 0.0,
+      "final_missing_fraction": 0.0
+    },
+    {
+      "feature": "impression_weighted_position",
+      "train_median": 8.797458515067254,
+      "final_median": 9.222755573029714,
+      "train_missing_fraction": 0.00035368182782768623,
+      "final_missing_fraction": 0.0
+    },
+    {
+      "feature": "active_day_share",
+      "train_median": 1.0,
+      "final_median": 1.0,
+      "train_missing_fraction": 0.0,
+      "final_missing_fraction": 0.0
+    },
+    {
+      "feature": "daily_impression_cv",
+      "train_median": 0.42506243563068663,
+      "final_median": 0.3918607944130513,
+      "train_missing_fraction": 0.0,
+      "final_missing_fraction": 0.0
+    }
+  ],
+  "model_top20_non_declines": 3,
+  "selected_recommender": "model",
+  "historical_queue_rows": 39396,
+  "public_recommendations": [
+    {
+      "rank": 1,
+      "candidate": "Review 01",
+      "action": "Inspect before refreshing",
+      "reason_code": "inspect_visibility_context",
+      "model_score": 0.535,
+      "score_caution": "Uncalibrated leaf frequency, not probability of refresh benefit",
+      "why": "Ranked by the selected method; inspect intent, missing coverage and technical context.",
+      "wrong_if": "The page already meets intent, or visibility loss has a technical or seasonal cause.",
+      "confidence": "Low editorial confidence; page text and query intent were not inspected."
+    },
+    {
+      "rank": 2,
+      "candidate": "Review 02",
+      "action": "Inspect before refreshing",
+      "reason_code": "inspect_visibility_context",
+      "model_score": 0.535,
+      "score_caution": "Uncalibrated leaf frequency, not probability of refresh benefit",
+      "why": "Ranked by the selected method; inspect intent, missing coverage and technical context.",
+      "wrong_if": "The page already meets intent, or visibility loss has a technical or seasonal cause.",
+      "confidence": "Low editorial confidence; page text and query intent were not inspected."
+    },
+    {
+      "rank": 3,
+      "candidate": "Review 03",
+      "action": "Inspect before refreshing",
+      "reason_code": "inspect_visibility_context",
+      "model_score": 0.535,
+      "score_caution": "Uncalibrated leaf frequency, not probability of refresh benefit",
+      "why": "Ranked by the selected method; inspect intent, missing coverage and technical context.",
+      "wrong_if": "The page already meets intent, or visibility loss has a technical or seasonal cause.",
+      "confidence": "Low editorial confidence; page text and query intent were not inspected."
+    },
+    {
+      "rank": 4,
+      "candidate": "Review 04",
+      "action": "Inspect before refreshing",
+      "reason_code": "inspect_visibility_context",
+      "model_score": 0.535,
+      "score_caution": "Uncalibrated leaf frequency, not probability of refresh benefit",
+      "why": "Ranked by the selected method; inspect intent, missing coverage and technical context.",
+      "wrong_if": "The page already meets intent, or visibility loss has a technical or seasonal cause.",
+      "confidence": "Low editorial confidence; page text and query intent were not inspected."
+    },
+    {
+      "rank": 5,
+      "candidate": "Review 05",
+      "action": "Inspect before refreshing",
+      "reason_code": "inspect_visibility_context",
+      "model_score": 0.535,
+      "score_caution": "Uncalibrated leaf frequency, not probability of refresh benefit",
+      "why": "Ranked by the selected method; inspect intent, missing coverage and technical context.",
+      "wrong_if": "The page already meets intent, or visibility loss has a technical or seasonal cause.",
+      "confidence": "Low editorial confidence; page text and query intent were not inspected."
+    },
+    {
+      "rank": 6,
+      "candidate": "Review 06",
+      "action": "Inspect before refreshing",
+      "reason_code": "inspect_visibility_context",
+      "model_score": 0.535,
+      "score_caution": "Uncalibrated leaf frequency, not probability of refresh benefit",
+      "why": "Ranked by the selected method; inspect intent, missing coverage and technical context.",
+      "wrong_if": "The page already meets intent, or visibility loss has a technical or seasonal cause.",
+      "confidence": "Low editorial confidence; page text and query intent were not inspected."
+    },
+    {
+      "rank": 7,
+      "candidate": "Review 07",
+      "action": "Inspect before refreshing",
+      "reason_code": "inspect_visibility_context",
+      "model_score": 0.535,
+      "score_caution": "Uncalibrated leaf frequency, not probability of refresh benefit",
+      "why": "Ranked by the selected method; inspect intent, missing coverage and technical context.",
+      "wrong_if": "The page already meets intent, or visibility loss has a technical or seasonal cause.",
+      "confidence": "Low editorial confidence; page text and query intent were not inspected."
+    },
+    {
+      "rank": 8,
+      "candidate": "Review 08",
+      "action": "Inspect before refreshing",
+      "reason_code": "inspect_visibility_context",
+      "model_score": 0.535,
+      "score_caution": "Uncalibrated leaf frequency, not probability of refresh benefit",
+      "why": "Ranked by the selected method; inspect intent, missing coverage and technical context.",
+      "wrong_if": "The page already meets intent, or visibility loss has a technical or seasonal cause.",
+      "confidence": "Low editorial confidence; page text and query intent were not inspected."
+    },
+    {
+      "rank": 9,
+      "candidate": "Review 09",
+      "action": "Inspect before refreshing",
+      "reason_code": "inspect_visibility_context",
+      "model_score": 0.535,
+      "score_caution": "Uncalibrated leaf frequency, not probability of refresh benefit",
+      "why": "Ranked by the selected method; inspect intent, missing coverage and technical context.",
+      "wrong_if": "The page already meets intent, or visibility loss has a technical or seasonal cause.",
+      "confidence": "Low editorial confidence; page text and query intent were not inspected."
+    },
+    {
+      "rank": 10,
+      "candidate": "Review 10",
+      "action": "Inspect before refreshing",
+      "reason_code": "inspect_visibility_context",
+      "model_score": 0.535,
+      "score_caution": "Uncalibrated leaf frequency, not probability of refresh benefit",
+      "why": "Ranked by the selected method; inspect intent, missing coverage and technical context.",
+      "wrong_if": "The page already meets intent, or visibility loss has a technical or seasonal cause.",
+      "confidence": "Low editorial confidence; page text and query intent were not inspected."
+    }
+  ],
+  "checks": {
+    "disjoint_training_and_primary_clients": true,
+    "baseline_split_matches_week4": true,
+    "feature_window_precedes_outcome": true,
+    "score_features_exclude_ids_and_labels": true,
+    "unknown_outcomes_not_negative": true,
+    "subone_position_values_excluded": true
+  },
+  "versions": {
+    "pandas": "3.0.6",
+    "numpy": "2.5.3",
+    "duckdb": "1.5.5",
+    "scikit-learn": "1.9.1",
+    "huggingface_hub": "2.0.0"
+  },
+  "python": "3.14.6",
+  "scope": "Historical March/June 2026 analysis, not current live recommendations; no causal effect claims."
+}

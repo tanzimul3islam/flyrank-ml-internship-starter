@@ -1,0 +1,22 @@
+|--- ctr_pct <= 0.361
+|   |--- mean_daily_impressions <= 17.036
+|   |   |--- mean_daily_impressions <= 12.179
+|   |   |   |--- class: 0
+|   |   |--- mean_daily_impressions >  12.179
+|   |   |   |--- class: 0
+|   |--- mean_daily_impressions >  17.036
+|   |   |--- impression_weighted_position <= 26.338
+|   |   |   |--- class: 0
+|   |   |--- impression_weighted_position >  26.338
+|   |   |   |--- class: 1
+|--- ctr_pct >  0.361
+|   |--- ctr_pct <= 0.376
+|   |   |--- daily_impression_cv <= 0.544
+|   |   |   |--- class: 0
+|   |   |--- daily_impression_cv >  0.544
+|   |   |   |--- class: 0
+|   |--- ctr_pct >  0.376
+|   |   |--- daily_impression_cv <= 0.370
+|   |   |   |--- class: 0
+|   |   |--- daily_impression_cv >  0.370
+|   |   |   |--- class: 0
