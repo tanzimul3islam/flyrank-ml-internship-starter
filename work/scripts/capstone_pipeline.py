@@ -39,7 +39,7 @@ def load_month(month):
     """One pinned month only; aggregate locally and cache derived page-level data."""
     CACHE.mkdir(parents=True, exist_ok=True)
     sql = (ROOT / 'work/scripts/capstone_features.sql').read_text().format(month=month)
-    key = hashlib.sha256((REVISION + sql).encode()).hexdigest()[:16]
+    key = hashlib.sha256(('exact_dedup_v1' + REVISION + sql).encode()).hexdigest()[:16]
     cache_file = CACHE / f'{month}-{key}.parquet'
     audit_file = CACHE / f'{month}-{key}.json'
     if cache_file.exists() and audit_file.exists():
@@ -80,12 +80,32 @@ def load_month(month):
         SELECT report_date, client_hash_id, content_hash_id FROM march
         GROUP BY ALL HAVING COUNT(*) > 1 OR report_date IS NULL
             OR client_hash_id IS NULL OR content_hash_id IS NULL)''').fetchone()[0]
-    assert violations == 0, 'Page-day grain violation'
+    # Data-only amendment: June has duplicate keys, but all used fields are identical.
+    # No outcome metric had been computed when this defect was found.
+    if violations:
+        con.execute("CREATE TEMP TABLE duplicate_keys AS SELECT report_date, client_hash_id, content_hash_id, COUNT(*) AS n FROM march GROUP BY 1,2,3 HAVING COUNT(*) > 1")
+        conflicts = con.sql("""SELECT COUNT(*) FROM (
+            SELECT m.report_date, m.client_hash_id, m.content_hash_id
+            FROM march m JOIN duplicate_keys USING (report_date, client_hash_id, content_hash_id)
+            GROUP BY 1,2,3
+            HAVING COUNT(DISTINCT ROW(gsc_data_available, gsc_impressions, gsc_clicks, gsc_avg_position)) > 1
+        )""").fetchone()[0]
+        null_keys = con.sql("SELECT COUNT(*) FROM march WHERE report_date IS NULL OR client_hash_id IS NULL OR content_hash_id IS NULL").fetchone()[0]
+        assert conflicts == 0 and null_keys == 0, 'Conflicting duplicates or null keys require investigation.'
+        removed = int(con.sql("SELECT SUM(n-1) FROM duplicate_keys").fetchone()[0])
+        con.read_parquet(file).project(columns).create_view('source_raw')
+        con.sql('SELECT DISTINCT * FROM source_raw').create_view('march', replace=True)
+        audit.update(duplicate_keys=int(violations), identical_extra_rows_removed=removed, conflicting_keys=0)
+    else:
+        audit.update(duplicate_keys=0, identical_extra_rows_removed=0, conflicting_keys=0)
+    clean_violations = con.sql("SELECT COUNT(*) FROM (SELECT report_date,client_hash_id,content_hash_id FROM march GROUP BY 1,2,3 HAVING COUNT(*)>1)").fetchone()[0]
+    assert clean_violations == 0, 'Grain still invalid after exact deduplication'
+    audit['clean_page_day_rows'] = int(con.sql('SELECT COUNT(*) FROM march').fetchone()[0])
     assert str(audit['first_date'])[:7] == str(audit['last_date'])[:7] == month
     page = con.sql(sql).df().sort_values(KEYS).reset_index(drop=True)
     con.close()
     audit = {k: str(v)[:10] if k.endswith('date') else int(v) for k, v in audit.items()}
-    audit.update(partition=partition, source_grain_violations=violations, aggregate_rows=len(page))
+    audit.update(partition=partition, source_grain_violations_before_cleaning=violations, source_grain_violations_after_cleaning=clean_violations, aggregate_rows=len(page))
     page.to_parquet(cache_file, index=False)
     audit_file.write_text(json.dumps(audit, indent=2) + '\n')
     return page, audit

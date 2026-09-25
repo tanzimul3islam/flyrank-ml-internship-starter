@@ -1,0 +1,10 @@
+{
+  "date": "2026-09-26",
+  "original_protocol_commit": "01a5c7b",
+  "stage": "Before any June model metric was calculated",
+  "reason": "June source grain check found 6390 duplicated page-day keys, each with multiplicity 2, no null keys, and zero conflicts across all fields used by this analysis.",
+  "change": "Collapse only identical copies across the selected daily fields; conflicting duplicates continue to fail. Apply the same quality rule to both months.",
+  "unchanged": "Model, feature definitions, eligibility, label, split, thresholds and comparison metrics remain frozen.",
+  "June_extra_rows_removed": 6390,
+  "June_conflicting_keys": 0
+}
