@@ -1,0 +1,144 @@
+{
+  "rule_version": "volume_first_v1",
+  "dataset_revision": "50cbf7c3909d07be4d1b5906b4d09e882e5acbf2",
+  "partition": "fact_content_daily_performance/month=2026-03/data_0.parquet",
+  "lane": "Lane 2: Refresh / Content Opportunity Scoring",
+  "lane_locked": true,
+  "feature_window": [
+    "2026-03-01",
+    "2026-03-14"
+  ],
+  "decision_date": "2026-03-17",
+  "outcome_window": [
+    "2026-03-17",
+    "2026-03-30"
+  ],
+  "minimum_past_impressions": 100,
+  "label_definition": "future_14d_impressions < 0.8 * past_14d_impressions; both windows fully covered",
+  "score_inputs": [
+    "past_impressions"
+  ],
+  "score_formula": "past_impressions",
+  "reason_code": "visible_exposure_priority",
+  "action_label": "inspect_for_refresh",
+  "random_seed": 42,
+  "queue_rows": 60534,
+  "labeled_rows": 57624,
+  "development_rows": 14137,
+  "comparison_rows": 43487,
+  "comparison_clients": 8,
+  "comparison_status": "Previously inspected in Week 3; not an untouched final test",
+  "comparison_keys_sha256": "ce472956efff058d16e5a3c596fee4d3f35095bbb1b440804ba79086e321b4c1",
+  "development_keys_sha256": "c1ffebbcc992ee4b6c460370933d18e371f0b0dc633d7800b39f7c0b22e05a95",
+  "k": 20,
+  "proxy_precision_at_k": 0.45,
+  "decline_base_rate": 0.37436475268471037,
+  "precision_lift_absolute": 0.07563524731528964,
+  "roc_auc": 0.5324104424997577,
+  "top_k_clients": 3,
+  "signal_verdicts": {
+    "volume": "MIXED",
+    "volatility": "MIXED"
+  },
+  "volume_buckets": [
+    {
+      "bucket": "100\u2013299",
+      "n": 4879,
+      "clients": 24,
+      "declines": 1381,
+      "decline_rate": 0.2830498053,
+      "median_past_impressions": 176.0
+    },
+    {
+      "bucket": "300\u2013999",
+      "n": 5355,
+      "clients": 20,
+      "declines": 1638,
+      "decline_rate": 0.3058823529,
+      "median_past_impressions": 571.0
+    },
+    {
+      "bucket": "1,000\u20132,999",
+      "n": 2583,
+      "clients": 18,
+      "declines": 848,
+      "decline_rate": 0.3283004259,
+      "median_past_impressions": 1579.0
+    },
+    {
+      "bucket": "3,000\u20139,999",
+      "n": 1084,
+      "clients": 15,
+      "declines": 361,
+      "decline_rate": 0.3330258303,
+      "median_past_impressions": 4538.5
+    },
+    {
+      "bucket": "10,000+",
+      "n": 236,
+      "clients": 12,
+      "declines": 77,
+      "decline_rate": 0.3262711864,
+      "median_past_impressions": 14211.0
+    }
+  ],
+  "volatility_buckets": [
+    {
+      "bucket": "<0.25",
+      "n": 1736,
+      "clients": 18,
+      "declines": 469,
+      "decline_rate": 0.2701612903,
+      "median_past_impressions": 1143.0
+    },
+    {
+      "bucket": "0.25\u2013<0.5",
+      "n": 7280,
+      "clients": 23,
+      "declines": 2341,
+      "decline_rate": 0.3215659341,
+      "median_past_impressions": 434.0
+    },
+    {
+      "bucket": "0.5\u2013<1",
+      "n": 4733,
+      "clients": 22,
+      "declines": 1341,
+      "decline_rate": 0.283329812,
+      "median_past_impressions": 431.0
+    },
+    {
+      "bucket": "1\u2013<2",
+      "n": 382,
+      "clients": 17,
+      "declines": 151,
+      "decline_rate": 0.3952879581,
+      "median_past_impressions": 475.5
+    },
+    {
+      "bucket": "2+",
+      "n": 6,
+      "clients": 3,
+      "declines": 3,
+      "decline_rate": 0.5,
+      "median_past_impressions": 1039.5
+    }
+  ],
+  "versions": {
+    "pandas": "3.0.6",
+    "duckdb": "1.5.5",
+    "huggingface_hub": "2.0.0",
+    "scikit-learn": "1.9.1"
+  },
+  "unlabeled_queue_rows": 2910,
+  "top10_review_count": 10,
+  "top10_clients": 4,
+  "top10_largest_client_count": 4,
+  "queue_csv_sha256": "5cd7cae9b540e6db39fe98b7ef91a5e653ed2022a090dd3b6334cfc6cf1aedcc",
+  "checks": {
+    "source_grain_passed": true,
+    "future_columns_absent_from_queue": true,
+    "score_inputs_past_only": true,
+    "csv_roundtrip_passed": true
+  }
+}
