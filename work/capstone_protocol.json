@@ -1,0 +1,59 @@
+{
+  "protocol_version": "capstone_v1",
+  "dataset_revision": "50cbf7c3909d07be4d1b5906b4d09e882e5acbf2",
+  "lane": "Refresh / Content Opportunity Scoring",
+  "development_month": "2026-03",
+  "final_month": "2026-06",
+  "feature_days": [
+    1,
+    14
+  ],
+  "buffer_days": [
+    15,
+    16
+  ],
+  "decision_day": 17,
+  "outcome_days": [
+    17,
+    30
+  ],
+  "minimum_past_impressions": 100,
+  "coverage": "14 valid GSC days per window; future coverage for label only",
+  "label": "outcome_impressions < 0.8 * past_impressions",
+  "features": [
+    "mean_daily_impressions",
+    "ctr_pct",
+    "impression_weighted_position",
+    "active_day_share",
+    "daily_impression_cv"
+  ],
+  "quality_change": "Daily position <1 becomes missing, motivated by Week 4 review before June was read; row eligibility unchanged.",
+  "model": {
+    "class": "DecisionTreeClassifier",
+    "max_depth": 3,
+    "min_samples_leaf": 100,
+    "random_state": 42
+  },
+  "missing_values": "Median imputation fitted only on March development clients; no extra features",
+  "split": {
+    "class": "GroupShuffleSplit",
+    "test_size": 0.25,
+    "random_state": 42,
+    "group": "client_hash_id"
+  },
+  "internal_validation": "5-fold GroupKFold on March development clients, no model selection or parameter search",
+  "baseline": "Frozen volume_first_v1: score = past_impressions; deterministic client/content key tiebreak",
+  "primary_final_cohort": "June labeled pages belonging to the original March holdout clients; never trained on these clients",
+  "secondary_cohort": "All June labeled pages, explicitly mixed seen/unseen clients",
+  "primary_metric": "decline-proxy precision@20 difference: model minus baseline on identical cohort",
+  "secondary_metrics": [
+    "ROC-AUC",
+    "average precision",
+    "decline prevalence",
+    "per-client precision@min(20,n)"
+  ],
+  "uncertainty": "500 paired client-bootstrap resamples on primary final cohort, recomputing global top20; descriptive percentile interval with few clusters",
+  "decision_policy": "Keep baseline if final model precision@20 does not exceed baseline; any observed lift remains decision-support, not refresh benefit.",
+  "no_adaptation": "Do not tune model, features, eligibility, label, ranking tie policy or thresholds after observing June.",
+  "recommendations": "Historical June 17 queue for final holdout clients based on past data only, including unknown outcomes; inspect before editing."
+}

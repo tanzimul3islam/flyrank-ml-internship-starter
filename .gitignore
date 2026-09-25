@@ -37,3 +37,9 @@ venv/
 
 # Local gated warehouse cache (including hub metadata) must stay private.
 work/outputs/hf_cache/
+
+# Local publishing credentials and helpers.
+work/outputs/publish_auth/
+
+# Regenerable per-page capstone feature/prediction caches.
+work/outputs/capstone_cache/
