@@ -34,3 +34,6 @@ __pycache__/
 .venv/
 venv/
 .env
+
+# Local gated warehouse cache (including hub metadata) must stay private.
+work/outputs/hf_cache/
